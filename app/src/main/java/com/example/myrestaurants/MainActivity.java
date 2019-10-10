@@ -12,8 +12,8 @@ import butterknife.ButterKnife;
 
 
 
-public class MainActivity extends AppCompatActivity {
-//    public static final String TAG = MainActivity.class.getSimpleName();
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     @BindView(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
     @BindView(R.id.locationEditText) EditText mLocationEditText;
     @BindView(R.id.appNameTextView) TextView mAppNameTextView;
@@ -22,20 +22,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-//        mLocationEditText = (EditText) findViewById(R.id.locationEditText);
-//        mFindRestaurantsButton = (Button) findViewById(R.id.findRestaurantsButton);
+
         mFindRestaurantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String location = mLocationEditText.getText().toString();
 
                 Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
                 intent.putExtra("Rachel", location);
                 startActivity(intent);
-
             }
 
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == mFindRestaurantsButton) {
+            String location = mLocationEditText.getText().toString();
+
+            Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
+            intent.putExtra("Rachel", location);
+            startActivity(intent);
+        }
     }
 }
